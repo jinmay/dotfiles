@@ -20,17 +20,17 @@ require("lazy").setup({
 
 	-- colorscheme
 	-- themes
-	"rebelot/kanagawa.nvim",
+	-- "rebelot/kanagawa.nvim",
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{ "echasnovski/mini.nvim", version = false },
-	{ "rose-pine/neovim", name = "rose-pine" },
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
-	},
-	{ "EdenEast/nightfox.nvim" },
+	-- { "echasnovski/mini.nvim", version = false },
+	-- { "rose-pine/neovim", name = "rose-pine" },
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {},
+	-- },
+	-- { "EdenEast/nightfox.nvim" },
 
 	-- base
 	"folke/which-key.nvim",
@@ -153,13 +153,13 @@ require("lazy").setup({
 	-- { "joshuavial/aider.nvim" },
 
 	-- ETC
-	{
-		"ThePrimeagen/refactoring.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-	},
+	-- {
+	-- 	"ThePrimeagen/refactoring.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 	},
+	-- },
 	{
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
