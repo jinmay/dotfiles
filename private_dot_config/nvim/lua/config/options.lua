@@ -46,3 +46,6 @@ for k, v in pairs(options) do
 end
 
 vim.api.nvim_set_keymap("n", "<C-L>", "", { noremap = true })
+
+-- Disable default virtual text
+vim.diagnostic.config({ virtual_text = false })

@@ -47,6 +47,7 @@ wk.add({
 	{ "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Find buffers", remap = false },
 	{ "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
 	{ "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<cr>", desc = "Grep string", remap = false },
+	{ "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", desc = "Quickfix", remap = false },
 	-- git
 	{ "<leader>gg", toggle_fugitive, desc = "Git status", remap = false },
 	{ "<leader>gc", ":G commit<cr>", desc = "Git commit", remap = false },
@@ -163,6 +164,16 @@ wk.add({
 			harpoon:list():select(5)
 		end,
 		desc = "harpoon to file 5",
+	},
+
+	-- quicknotes
+	{ "<leader>qn", ":Quicknotes<CR>", desc = "Open quicknotes" },
+	{
+		"<leader>td",
+		function()
+			require("dooing.ui").toggle_todo_window()
+		end,
+		desc = "Open quicknotes",
 	},
 })
 
