@@ -51,6 +51,10 @@ require("lazy").setup({
 	"windwp/nvim-autopairs",
 	"windwp/nvim-ts-autotag",
 	{ "kevinhwang91/nvim-ufo", dependencies = { "kevinhwang91/promise-async" } },
+	{
+		"stevearc/dressing.nvim",
+		opts = {},
+	},
 
 	-- LSP
 	"hrsh7th/cmp-buffer",
@@ -154,5 +158,32 @@ require("lazy").setup({
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy", -- Or `LspAttach`
+		priority = 1000,
+		config = function()
+			require("tiny-inline-diagnostic").setup()
+		end,
+	},
+	{ "TaDaa/vimade", event = "VeryLazy" },
+	{
+		"davmacario/nvim-quicknotes",
+		keys = { "<leader>qn" },
+		cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" }, -- Lazy-load the plugin
+	},
+	{
+		"tzachar/highlight-undo.nvim",
+		config = function()
+			require("highlight-undo").setup({})
+		end,
+	},
+	{ "atiladefreitas/dooing" },
+	{
+		"Bryley/neoai.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+		},
 	},
 })
