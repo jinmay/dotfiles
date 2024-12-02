@@ -171,7 +171,7 @@ require("lazy").setup({
 	{
 		"davmacario/nvim-quicknotes",
 		keys = { "<leader>qn" },
-		cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" }, -- Lazy-load the plugin
+		cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" },
 	},
 	{
 		"tzachar/highlight-undo.nvim",
