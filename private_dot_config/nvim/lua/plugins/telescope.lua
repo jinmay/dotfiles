@@ -45,32 +45,32 @@ telescope.setup({
 					print("Added " .. #qf_list .. " items to Quickfix")
 					actions.close(prompt_bufnr)
 				end,
-				n = {
-					-- Normal 모드에서도 동일한 기능
-					["<C-q>"] = function(prompt_bufnr)
-						local picker = action_state.get_current_picker(prompt_bufnr)
-						local selections = picker:get_multi_selection()
-
-						if vim.tbl_isempty(selections) then
-							print("No selections to send to Quickfix")
-							return
-						end
-
-						local qf_list = {}
-						for _, entry in ipairs(selections) do
-							table.insert(qf_list, {
-								filename = entry.filename or entry.path,
-								lnum = entry.lnum,
-								col = entry.col,
-								text = entry.text,
-							})
-						end
-
-						vim.fn.setqflist(qf_list)
-						print("Added " .. #qf_list .. " items to Quickfix")
-						actions.close(prompt_bufnr)
-					end,
-				},
+				-- n = {
+				-- 	-- Normal 모드에서도 동일한 기능
+				-- 	["<C-q>"] = function(prompt_bufnr)
+				-- 		local picker = action_state.get_current_picker(prompt_bufnr)
+				-- 		local selections = picker:get_multi_selection()
+				--
+				-- 		if vim.tbl_isempty(selections) then
+				-- 			print("No selections to send to Quickfix")
+				-- 			return
+				-- 		end
+				--
+				-- 		local qf_list = {}
+				-- 		for _, entry in ipairs(selections) do
+				-- 			table.insert(qf_list, {
+				-- 				filename = entry.filename or entry.path,
+				-- 				lnum = entry.lnum,
+				-- 				col = entry.col,
+				-- 				text = entry.text,
+				-- 			})
+				-- 		end
+				--
+				-- 		vim.fn.setqflist(qf_list)
+				-- 		print("Added " .. #qf_list .. " items to Quickfix")
+				-- 		actions.close(prompt_bufnr)
+				-- 	end,
+				-- },
 			},
 		},
 	},

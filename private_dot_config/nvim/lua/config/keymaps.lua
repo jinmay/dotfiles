@@ -2,19 +2,6 @@ local wk = require("which-key")
 local copilot_chat = require("plugins.copilot-chat")
 local harpoon = require("harpoon")
 
--- toggle git status command
-local toggle_fugitive = function()
-	local winids = vim.api.nvim_list_wins()
-	for _, id in pairs(winids) do
-		local status = pcall(vim.api.nvim_win_get_var, id, "fugitive_status")
-		if status then
-			vim.api.nvim_win_close(id, false)
-			return
-		end
-	end
-	vim.cmd("Git")
-end
-
 -- Normal
 wk.add({
 	{ "<S-Down>", ":resize -2<CR>", desc = "Decrease height", remap = false },
@@ -36,20 +23,13 @@ wk.add({
 	{ "<leader>do", "<cmd>lua require('dap').step_over()<cr>", desc = "DAP Step Over", remap = false },
 	{ "<leader>ds", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Test Summary", remap = false },
 	{ "<leader>e", ":NvimTreeToggle<cr>", desc = "Toggle NvimTree", remap = false },
-	-- telescope
-	-- {
-	-- 	"<leader>f",
-	-- 	"<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({ previewer = true }))<cr>",
-	-- 	desc = "Find files with dropdown",
-	-- 	remap = false,
-	-- },
 	{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files", remap = false },
 	{ "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Find buffers", remap = false },
 	{ "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
 	{ "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<cr>", desc = "Grep string", remap = false },
 	{ "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", desc = "Quickfix", remap = false },
 	-- git
-	{ "<leader>gg", toggle_fugitive, desc = "Git status", remap = false },
+	{ "<leader>gg", require("utils.git").toggle_fugitive, desc = "Git status", remap = false },
 	{ "<leader>gc", ":G commit<cr>", desc = "Git commit", remap = false },
 	{ "<leader>ga", ":G commit --amend<cr>", desc = "Git commit --amend", remap = false },
 	{ "<leader>gp", ":G push<cr>", desc = "Git push", remap = false },
