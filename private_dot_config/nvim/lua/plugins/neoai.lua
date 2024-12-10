@@ -12,6 +12,11 @@ neoai.setup({
 			params = nil,
 		},
 	},
+	open_ai = {
+		api_key = {
+			env = "OPENAI_AVANTE_API_KEY",
+		},
+	},
 	shortcuts = {
 		{
 			name = "gitcommit",

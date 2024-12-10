@@ -49,3 +49,7 @@ vim.api.nvim_set_keymap("n", "<C-L>", "", { noremap = true })
 
 -- Disable default virtual text
 vim.diagnostic.config({ virtual_text = false })
+
+-- use nvim-notify
+local notify = require("notify")
+vim.notify = notify

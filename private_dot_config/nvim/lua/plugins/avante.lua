@@ -14,8 +14,8 @@ require("render-markdown").setup({
 
 require("avante_lib").load()
 require("avante").setup({
-	provider = "copilot",
-	auto_suggestions_provider = "copilot",
+	provider = "openai",
+	auto_suggestions_provider = "openai",
 	copilot = {
 		endpoint = "https://api.githubcopilot.com",
 		model = "gpt-4o",
@@ -32,15 +32,13 @@ require("avante").setup({
 		timeout = 30000,
 		temperature = 0,
 		max_tokens = 4096,
-		["local"] = false,
 	},
 	gemini = {
 		endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-		model = "gemini-1.5-flash-latest",
-		api_key_name = "GEMINI_API_KEY",
+		model = "gemini-1.5-flash-8b",
+		api_key_name = "GEMINI_AVANTE_API_KEY",
 		timeout = 30000,
 		temperature = 0,
 		max_tokens = 4096,
-		["local"] = false,
 	},
 })

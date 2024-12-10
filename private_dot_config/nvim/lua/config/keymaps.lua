@@ -1,6 +1,8 @@
 local wk = require("which-key")
 local copilot_chat = require("plugins.copilot-chat")
-local harpoon = require("harpoon")
+local ai_utils = require("utils.ai")
+local avante = require("avante.api")
+-- local harpoon = require("harpoon")
 
 -- Normal
 wk.add({
@@ -70,30 +72,30 @@ wk.add({
 
 	-- copilot chat
 	-- open copilot chat in vertical split
-	{
-		"<leader>at",
-		":CopilotChatToggle<cr>",
-		desc = "CopilotChat - Toggle",
-		remap = false,
-	},
-	{
-		"<leader>aq",
-		copilot_chat.quick_chat,
-		desc = "CopilotChat - Quick chat",
-		remap = false,
-	},
-	{
-		"<leader>as",
-		":CopilotChatStop<cr>",
-		desc = "CopilotChat - Stop",
-		remap = false,
-	},
-	{
-		"<leader>oa",
-		":lua AiderOpen()<cr>",
-		desc = "Aider - Open",
-		remap = false,
-	},
+	-- {
+	-- 	"<leader>at",
+	-- 	":CopilotChatToggle<cr>",
+	-- 	desc = "CopilotChat - Toggle",
+	-- 	remap = false,
+	-- },
+	-- {
+	-- 	"<leader>aq",
+	-- 	copilot_chat.quick_chat,
+	-- 	desc = "CopilotChat - Quick chat",
+	-- 	remap = false,
+	-- },
+	-- {
+	-- 	"<leader>as",
+	-- 	":CopilotChatStop<cr>",
+	-- 	desc = "CopilotChat - Stop",
+	-- 	remap = false,
+	-- },
+	-- {
+	-- 	"<leader>oa",
+	-- 	":lua AiderOpen()<cr>",
+	-- 	desc = "Aider - Open",
+	-- 	remap = false,
+	-- },
 
 	-- harpoon
 	-- {
@@ -103,48 +105,48 @@ wk.add({
 	-- 	end,
 	-- 	desc = "harpoon quick menu",
 	-- },
-	{
-		"<leader>A",
-		function()
-			harpoon:list():add()
-		end,
-		desc = "harpoon file",
-	},
-	{
-		"<leader>1",
-		function()
-			harpoon:list():select(1)
-		end,
-		desc = "harpoon to file 1",
-	},
-	{
-		"<leader>2",
-		function()
-			harpoon:list():select(2)
-		end,
-		desc = "harpoon to file 2",
-	},
-	{
-		"<leader>3",
-		function()
-			harpoon:list():select(3)
-		end,
-		desc = "harpoon to file 3",
-	},
-	{
-		"<leader>4",
-		function()
-			harpoon:list():select(4)
-		end,
-		desc = "harpoon to file 4",
-	},
-	{
-		"<leader>5",
-		function()
-			harpoon:list():select(5)
-		end,
-		desc = "harpoon to file 5",
-	},
+	-- {
+	-- 	"<leader>A",
+	-- 	function()
+	-- 		harpoon:list():add()
+	-- 	end,
+	-- 	desc = "harpoon file",
+	-- },
+	-- {
+	-- 	"<leader>1",
+	-- 	function()
+	-- 		harpoon:list():select(1)
+	-- 	end,
+	-- 	desc = "harpoon to file 1",
+	-- },
+	-- {
+	-- 	"<leader>2",
+	-- 	function()
+	-- 		harpoon:list():select(2)
+	-- 	end,
+	-- 	desc = "harpoon to file 2",
+	-- },
+	-- {
+	-- 	"<leader>3",
+	-- 	function()
+	-- 		harpoon:list():select(3)
+	-- 	end,
+	-- 	desc = "harpoon to file 3",
+	-- },
+	-- {
+	-- 	"<leader>4",
+	-- 	function()
+	-- 		harpoon:list():select(4)
+	-- 	end,
+	-- 	desc = "harpoon to file 4",
+	-- },
+	-- {
+	-- 	"<leader>5",
+	-- 	function()
+	-- 		harpoon:list():select(5)
+	-- 	end,
+	-- 	desc = "harpoon to file 5",
+	-- },
 
 	-- quicknotes
 	{ "<leader>qn", ":Quicknotes<CR>", desc = "Open quicknotes" },
@@ -163,9 +165,9 @@ wk.add({
 	{ "jk", "<ESC>", desc = "Escape", remap = false },
 
 	-- copilot
-	{ "<C-w>", "<Plug>(copilot-accept-word)", desc = "Accept Copilot suggestion word" },
-	{ "<C-l>", "<Plug>(copilot-accept-line)", desc = "Accept Copilot suggestion line" },
-	{ "<C-]>", "<Plug>(copilot-next)", desc = "Next Copilot suggestion" },
+	-- { "<C-w>", "<Plug>(copilot-accept-word)", desc = "Accept Copilot suggestion word" },
+	-- { "<C-l>", "<Plug>(copilot-accept-line)", desc = "Accept Copilot suggestion line" },
+	-- { "<C-]>", "<Plug>(copilot-next)", desc = "Next Copilot suggestion" },
 	-- { "<C-[>", "<Plug>(copilot-previous)", desc = "Previous Copilot suggestion" },
 	-- this makes keymap conflict with default vim esc
 })
@@ -174,6 +176,34 @@ wk.add({
 wk.add({
 	mode = "v",
 	{
+		{
+			"<leader>ab",
+			function()
+				avante.ask({ question = ai_utils.avante_fix_bugs })
+			end,
+			desc = "Fix Bugs(ask)",
+		},
+		{
+			"<leader>al",
+			function()
+				avante.ask({ question = ai_utils.avante_code_readability_analysis })
+			end,
+			desc = "Code Readability Analysis(ask)",
+		},
+		{
+			"<leader>aO",
+			function()
+				ai_utils.prefill_edit_window(ai_utils.avante_optimize_code)
+			end,
+			desc = "Optimize Code(edit)",
+		},
+		{
+			"<leader>aE",
+			function()
+				ai_utils.prefill_edit_window(ai_utils.avante_explain_code)
+			end,
+			desc = "Explain Code(edit)",
+		},
 		{ "<", "<gv", desc = "Indent left", remap = false },
 		{ ">", ">gv", desc = "Indent right", remap = false },
 		{ "J", ":m '>+1<CR>gv=gv", desc = "Move block down", remap = false },
@@ -181,15 +211,15 @@ wk.add({
 		{ "p", '"_dP', desc = "Paste", remap = false },
 		{ "zo", ":foldopen!<CR>", desc = "Open all folds in selection", remap = false },
 		{ "am", ":foldopen!<CR>", desc = "Open all folds in selection", remap = false },
-		{
-			"<leader>ax",
-			":CopilotChatInline<cr>",
-			desc = "CopilotChat - Inline chat",
-		},
-		{ "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-		{ "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-		{ "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-		{ "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-		{ "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
+		-- {
+		-- 	"<leader>ax",
+		-- 	":CopilotChatInline<cr>",
+		-- 	desc = "CopilotChat - Inline chat",
+		-- },
+		-- { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+		-- { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
+		-- { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+		-- { "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
+		-- { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
 	},
 })
