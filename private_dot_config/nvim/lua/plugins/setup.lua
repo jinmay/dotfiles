@@ -88,8 +88,15 @@ require("lazy").setup({
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
 		branch = "regexp",
 	},
-	"folke/neodev.nvim",
-	"nvim-neotest/neotest-python",
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+			},
+		},
+	},
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
@@ -98,6 +105,7 @@ require("lazy").setup({
 			"nvim-treesitter/nvim-treesitter",
 		},
 	},
+	"nvim-neotest/neotest-python",
 
 	-- debugger
 	{ "mfussenegger/nvim-dap", dependencies = { "nvim-treesitter/nvim-treesitter" } },
@@ -109,16 +117,6 @@ require("lazy").setup({
 	"lewis6991/gitsigns.nvim",
 	"tpope/vim-fugitive",
 	{ "folke/trouble.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-	"github/copilot.vim",
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "main",
-		dependencies = {
-			{ "github/copilot.vim" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-		},
-		build = "make tiktoken", -- Only on MacOS or Linux
-	},
 
 	-- AI
 	{
@@ -126,13 +124,11 @@ require("lazy").setup({
 		event = "VeryLazy",
 		lazy = false,
 		version = false, -- set this if you want to always pull the latest change
-		build = "make BUILD_FROM_SOURCE=true",
+		build = "make",
 		dependencies = {
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"zbirenbaum/copilot.lua", -- for providers='copilot'
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",
@@ -145,8 +141,6 @@ require("lazy").setup({
 						drag_and_drop = {
 							insert_mode = true,
 						},
-						-- required for Windows users
-						use_absolute_path = true,
 					},
 				},
 			},
@@ -161,19 +155,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- ETC
-	-- {
-	-- 	"ThePrimeagen/refactoring.nvim",
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 	},
-	-- },
-	-- {
-	-- 	"ThePrimeagen/harpoon",
-	-- 	branch = "harpoon2",
-	-- 	dependencies = { "nvim-lua/plenary.nvim" },
-	-- },
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`

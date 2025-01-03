@@ -23,14 +23,14 @@ nvim_tree.setup({
 		ignore_list = {},
 	},
 	filters = {
-		dotfiles = false,
+		dotfiles = true,
 		custom = {
 			"^.git$",
 		},
 	},
 	git = {
 		enable = true,
-		ignore = false,
+		ignore = true,
 		timeout = 500,
 	},
 	diagnostics = {

@@ -1,8 +1,6 @@
 local wk = require("which-key")
-local copilot_chat = require("plugins.copilot-chat")
 local ai_utils = require("utils.ai")
 local avante = require("avante.api")
--- local harpoon = require("harpoon")
 
 -- Normal
 wk.add({
@@ -10,21 +8,69 @@ wk.add({
 	{ "<S-Left>", ":vertical resize -2<CR>", desc = "Decrease width", remap = false },
 	{ "<S-Right>", ":vertical resize +2<CR>", desc = "Increase width", remap = false },
 	{ "<S-Up>", ":resize +2<CR>", desc = "Increase height", remap = false },
-	{ "<leader>b", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "DAP breakpoint", remap = false },
-	{ "<leader>d", group = "Neotest & DAP", remap = false },
-	{ "<leader>dO", "<cmd>lua require('dap').step_out()<cr>", desc = "DAP Step Out", remap = false },
-	{ "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "DAP Continue", remap = false },
+	-- neotest
 	{
-		"<leader>df",
-		"<cmd>lua require('neotest').run.run({vim.fn.expand('%')})<cr>",
-		desc = "Test Class",
+		"<leader>ts",
+		"<cmd>lua require('neotest').summary.toggle()<cr>",
+		desc = "Toggle Summary (Neotest)",
 		remap = false,
 	},
-	{ "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "DAP Step Into", remap = false },
-	{ "<leader>dm", "<cmd>lua require('neotest').run.run()<cr>", desc = "Test Method", remap = false },
+	{
+		"<leader>tr",
+		"<cmd>lua require('neotest').run.run()<cr>",
+		desc = "Run Nearest (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>tl",
+		"<cmd>lua require('neotest').run.run_last()<cr>",
+		desc = "Run Last (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>tt",
+		"<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>",
+		desc = "Run File (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>tT",
+		"<cmd>lua require('neotest').run.run(vim.uv.cwd())<cr>",
+		desc = "Run All Test Files (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>to",
+		"<cmd>lua require('neotest').output.open({ enter = true, auto_close = true })<cr>",
+		desc = "Show Output (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>tO",
+		"<cmd>lua require('neotest').output_panel.toggle()<cr>",
+		desc = "Toggle Output Panel (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>tS",
+		"<cmd>lua require('neotest').run.stop()<cr>",
+		desc = "Stop (Neotest)",
+		remap = false,
+	},
+	{
+		"<leader>tw",
+		"<cmd>lua require('neotest').watch.toggle(vim.fn.expand('%'))<cr>",
+		desc = "Toggle Watch (Neotest)",
+		remap = false,
+	},
+	-- dap
+	{ "<leader>b", "<cmd>lua require('dap').toggle_breakpoint()<cr>", desc = "DAP breakpoint", remap = false },
+	{ "<leader>dO", "<cmd>lua require('dap').step_out()<cr>", desc = "DAP Step Out", remap = false },
+	{ "<leader>dc", "<cmd>lua require('dap').continue()<cr>", desc = "DAP Continue", remap = false },
 	{ "<leader>do", "<cmd>lua require('dap').step_over()<cr>", desc = "DAP Step Over", remap = false },
-	{ "<leader>ds", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Test Summary", remap = false },
+	{ "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "DAP Step Into", remap = false },
 	{ "<leader>e", ":NvimTreeToggle<cr>", desc = "Toggle NvimTree", remap = false },
+	-- telescope
 	{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files", remap = false },
 	{ "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Find buffers", remap = false },
 	{ "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
@@ -70,84 +116,6 @@ wk.add({
 	{ "]b", ":BufferLineCycleNext<CR>", desc = "Next Buffer", remap = false },
 	{ "zo", "za", desc = "Toggle fold", remap = false },
 
-	-- copilot chat
-	-- open copilot chat in vertical split
-	-- {
-	-- 	"<leader>at",
-	-- 	":CopilotChatToggle<cr>",
-	-- 	desc = "CopilotChat - Toggle",
-	-- 	remap = false,
-	-- },
-	-- {
-	-- 	"<leader>aq",
-	-- 	copilot_chat.quick_chat,
-	-- 	desc = "CopilotChat - Quick chat",
-	-- 	remap = false,
-	-- },
-	-- {
-	-- 	"<leader>as",
-	-- 	":CopilotChatStop<cr>",
-	-- 	desc = "CopilotChat - Stop",
-	-- 	remap = false,
-	-- },
-	-- {
-	-- 	"<leader>oa",
-	-- 	":lua AiderOpen()<cr>",
-	-- 	desc = "Aider - Open",
-	-- 	remap = false,
-	-- },
-
-	-- harpoon
-	-- {
-	-- 	"<leader>aa",
-	-- 	function()
-	-- 		harpoon.toggle_telescope(harpoon.harpoon.list())
-	-- 	end,
-	-- 	desc = "harpoon quick menu",
-	-- },
-	-- {
-	-- 	"<leader>A",
-	-- 	function()
-	-- 		harpoon:list():add()
-	-- 	end,
-	-- 	desc = "harpoon file",
-	-- },
-	-- {
-	-- 	"<leader>1",
-	-- 	function()
-	-- 		harpoon:list():select(1)
-	-- 	end,
-	-- 	desc = "harpoon to file 1",
-	-- },
-	-- {
-	-- 	"<leader>2",
-	-- 	function()
-	-- 		harpoon:list():select(2)
-	-- 	end,
-	-- 	desc = "harpoon to file 2",
-	-- },
-	-- {
-	-- 	"<leader>3",
-	-- 	function()
-	-- 		harpoon:list():select(3)
-	-- 	end,
-	-- 	desc = "harpoon to file 3",
-	-- },
-	-- {
-	-- 	"<leader>4",
-	-- 	function()
-	-- 		harpoon:list():select(4)
-	-- 	end,
-	-- 	desc = "harpoon to file 4",
-	-- },
-	-- {
-	-- 	"<leader>5",
-	-- 	function()
-	-- 		harpoon:list():select(5)
-	-- 	end,
-	-- 	desc = "harpoon to file 5",
-	-- },
-
 	-- quicknotes
 	{ "<leader>qn", ":Quicknotes<CR>", desc = "Open quicknotes" },
 	{
@@ -163,13 +131,6 @@ wk.add({
 wk.add({
 	mode = "i",
 	{ "jk", "<ESC>", desc = "Escape", remap = false },
-
-	-- copilot
-	-- { "<C-w>", "<Plug>(copilot-accept-word)", desc = "Accept Copilot suggestion word" },
-	-- { "<C-l>", "<Plug>(copilot-accept-line)", desc = "Accept Copilot suggestion line" },
-	-- { "<C-]>", "<Plug>(copilot-next)", desc = "Next Copilot suggestion" },
-	-- { "<C-[>", "<Plug>(copilot-previous)", desc = "Previous Copilot suggestion" },
-	-- this makes keymap conflict with default vim esc
 })
 
 -- Visual
@@ -177,32 +138,32 @@ wk.add({
 	mode = "v",
 	{
 		{
-			"<leader>ab",
-			function()
-				avante.ask({ question = ai_utils.avante_fix_bugs })
-			end,
-			desc = "Fix Bugs(ask)",
-		},
-		{
-			"<leader>al",
+			"<leader>ar",
 			function()
 				avante.ask({ question = ai_utils.avante_code_readability_analysis })
 			end,
 			desc = "Code Readability Analysis(ask)",
 		},
 		{
-			"<leader>aO",
+			"<leader>ae",
 			function()
-				ai_utils.prefill_edit_window(ai_utils.avante_optimize_code)
+				avante.ask({ question = ai_utils.avante_explain_code })
 			end,
-			desc = "Optimize Code(edit)",
+			desc = "Explain Code(ask)",
 		},
 		{
-			"<leader>aE",
+			"<leader>ao",
 			function()
-				ai_utils.prefill_edit_window(ai_utils.avante_explain_code)
+				avante.ask({ question = ai_utils.avante_optimize_code })
 			end,
-			desc = "Explain Code(edit)",
+			desc = "Optimize Code(ask)",
+		},
+		{
+			"<leader>au",
+			function()
+				avante.ask({ question = ai_utils.avante_add_tests })
+			end,
+			desc = "Add Tests(ask)",
 		},
 		{ "<", "<gv", desc = "Indent left", remap = false },
 		{ ">", ">gv", desc = "Indent right", remap = false },
@@ -211,15 +172,5 @@ wk.add({
 		{ "p", '"_dP', desc = "Paste", remap = false },
 		{ "zo", ":foldopen!<CR>", desc = "Open all folds in selection", remap = false },
 		{ "am", ":foldopen!<CR>", desc = "Open all folds in selection", remap = false },
-		-- {
-		-- 	"<leader>ax",
-		-- 	":CopilotChatInline<cr>",
-		-- 	desc = "CopilotChat - Inline chat",
-		-- },
-		-- { "<leader>ae", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-		-- { "<leader>at", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-		-- { "<leader>ar", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
-		-- { "<leader>aR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code" },
-		-- { "<leader>an", "<cmd>CopilotChatBetterNamings<cr>", desc = "CopilotChat - Better Naming" },
 	},
 })
