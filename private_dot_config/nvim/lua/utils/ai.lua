@@ -33,11 +33,11 @@ M.avante_code_readability_analysis = [[
 
   Response in Korean.
 ]]
-M.avante_optimize_code = "Optimize the following code"
+M.avante_optimize_code = "Optimize the following code. In Korean."
 M.avante_explain_code = "Explain the following code. In Korean."
-local avante_add_docstring = "Add docstring to the following codes"
-M.avante_fix_bugs = "Fix the bugs inside the following codes if any"
-local avante_add_tests = "Implement tests for the following code"
+M.avante_add_docstring = "Add docstring to the following codes. In Korean."
+M.avante_fix_bugs = "Fix the bugs inside the following codes if any. In Korean."
+M.avante_add_tests = "Implement tests for the following code. In Korean."
 
 -- neoai for auto commit
 M.generate_commit_message = function(language)
