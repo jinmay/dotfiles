@@ -37,10 +37,18 @@ M.avante_optimize_code = "Optimize the following code. In Korean."
 M.avante_explain_code = "Explain the following code. In Korean."
 M.avante_add_docstring = "Add docstring to the following codes. In Korean."
 M.avante_fix_bugs = "Fix the bugs inside the following codes if any. In Korean."
-M.avante_add_tests = "Implement tests for the following code. In Korean."
+M.avante_add_tests = "Implement tests for the following code by using pytest. In Korean."
 
 -- neoai for auto commit
 M.generate_commit_message = function(language)
+	local git_diff
+
+	if vim.bo.filetype == "gitcommit" then
+		git_diff = vim.fn.trim(vim.fn.execute("G diff --cached"))
+	else
+		git_diff = vim.fn.system("git diff --cached")
+	end
+
 	local prompt = [[
       Using the following git diff generate a consise and
       clear git commit message, with a short title summary
@@ -48,7 +56,7 @@ M.generate_commit_message = function(language)
   ]] .. " and you should generate commit message in " .. language .. [[:
   ]] .. [[
   ```
-  ]] .. vim.fn.system("git diff --cached") .. [[
+  ]] .. git_diff .. [[
   ```
   And you shoud give me commit message immediately.
   And you don't need to explain unnecessary things.
