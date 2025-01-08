@@ -23,7 +23,9 @@ neoai.setup({
 			key = "<leader>ag",
 			desc = "Generate git commit message",
 			use_context = false,
-			prompt = require("utils.ai").generate_commit_message("English"),
+			prompt = function()
+				return require("utils.ai").generate_commit_message("English")
+			end,
 			modes = { "n" },
 			strip_function = nil,
 		},
