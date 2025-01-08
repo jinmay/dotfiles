@@ -1,6 +1,6 @@
 My dotfiles, managed by chezmoi.
 
-## Ubuntu Setup
+## Ubuntu
 
 ```bash
 # Install chezmoi
