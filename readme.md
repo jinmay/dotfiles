@@ -9,3 +9,17 @@ sudo mv ./bin/chezmoi /usr/local/bin/
 ```
 
 After install, restart session
+
+## Macbook
+
+### backup
+
+```bash
+brew bundle dump
+```
+
+### restore
+
+```bash
+brew bundle
+```
