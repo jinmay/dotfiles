@@ -1,6 +1,12 @@
 local wk = require("which-key")
 local ai_utils = require("utils.ai")
 local avante = require("avante.api")
+local copilot = require("copilot.suggestion")
+-- local nvim_aider = require("plugins.nvim-aider")
+--
+-- vim.api.nvim_create_user_command("AiderTerminalToggle", function()
+-- 	nvim_aider.toggle()
+-- end, {})
 
 -- Normal
 wk.add({
@@ -71,7 +77,7 @@ wk.add({
 	{ "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "DAP Step Into", remap = false },
 	{ "<leader>e", ":NvimTreeToggle<cr>", desc = "Toggle NvimTree", remap = false },
 	-- telescope
-	{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files", remap = false },
+	{ "<leader>ff", "<cmd>lua require('telescope.builtin').git_files()<cr>", desc = "Find files", remap = false },
 	{ "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Find buffers", remap = false },
 	{ "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
 	{ "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<cr>", desc = "Grep string", remap = false },
@@ -131,6 +137,24 @@ wk.add({
 wk.add({
 	mode = "i",
 	{ "jk", "<ESC>", desc = "Escape", remap = false },
+	{
+		"<C-w>",
+		function()
+			copilot.accept_word()
+		end,
+		desc = "Accept word",
+		remap = false,
+		silent = true,
+	},
+	{
+		"<C-l>",
+		function()
+			copilot.accept_line()
+		end,
+		desc = "Accept line",
+		remap = false,
+		silent = true,
+	},
 })
 
 -- Visual
