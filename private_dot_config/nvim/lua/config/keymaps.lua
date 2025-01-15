@@ -77,7 +77,7 @@ wk.add({
 	{ "<leader>di", "<cmd>lua require('dap').step_into()<cr>", desc = "DAP Step Into", remap = false },
 	{ "<leader>e", ":NvimTreeToggle<cr>", desc = "Toggle NvimTree", remap = false },
 	-- telescope
-	{ "<leader>ff", "<cmd>lua require('telescope.builtin').git_files()<cr>", desc = "Find files", remap = false },
+	{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files", remap = false },
 	{ "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Find buffers", remap = false },
 	{ "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
 	{ "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<cr>", desc = "Grep string", remap = false },
