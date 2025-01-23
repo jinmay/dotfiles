@@ -31,7 +31,6 @@ require("lazy").setup({
 		after = "nvim-treesitter",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
-	"jose-elias-alvarez/null-ls.nvim",
 
 	{
 		"nvim-telescope/telescope.nvim",
@@ -66,7 +65,7 @@ require("lazy").setup({
 	"L3MON4D3/LuaSnip",
 	"rafamadriz/friendly-snippets",
 	"neovim/nvim-lspconfig",
-	{ "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
+	{ "VonHeikemen/lsp-zero.nvim" },
 	{ "smjonas/inc-rename.nvim" },
 
 	-- Mason
@@ -87,15 +86,6 @@ require("lazy").setup({
 		"linux-cultist/venv-selector.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
 		branch = "regexp",
-	},
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
 	},
 	{
 		"nvim-neotest/neotest",
@@ -159,27 +149,26 @@ require("lazy").setup({
 			},
 		},
 	},
-	{
-		"GeorgesAlkhouri/nvim-aider",
-		cmd = {
-			"AiderTerminalToggle",
-		},
-		keys = {
-			{ "<leader>a/", "<cmd>AiderTerminalToggle<cr>", desc = "Open Aider" },
-			{ "<leader>as", "<cmd>AiderTerminalSend<cr>", desc = "Send to Aider", mode = { "n", "v" } },
-			{ "<leader>ac", "<cmd>AiderQuickSendCommand<cr>", desc = "Send Command To Aider" },
-			{ "<leader>ab", "<cmd>AiderQuickSendBuffer<cr>", desc = "Send Buffer To Aider" },
-			{ "<leader>a+", "<cmd>AiderQuickAddFile<cr>", desc = "Add File to Aider" },
-			{ "<leader>a-", "<cmd>AiderQuickDropFile<cr>", desc = "Drop File from Aider" },
-		},
-		dependencies = {
-			"folke/snacks.nvim",
-			"nvim-telescope/telescope.nvim",
-			--- The below dependencies are optional
-			-- "catppuccin/nvim",
-		},
-		config = true,
-	},
+	-- {
+	-- 	"GeorgesAlkhouri/nvim-aider",
+	-- 	cmd = {
+	-- 		"AiderTerminalToggle",
+	-- 	},
+	-- 	keys = {
+	-- 		{ "<leader>a/", "<cmd>AiderTerminalToggle<cr>", desc = "Open Aider" },
+	-- 		{ "<leader>as", "<cmd>AiderTerminalSend<cr>", desc = "Send to Aider", mode = { "n", "v" } },
+	-- 		{ "<leader>ac", "<cmd>AiderQuickSendCommand<cr>", desc = "Send Command To Aider" },
+	-- 		{ "<leader>ab", "<cmd>AiderQuickSendBuffer<cr>", desc = "Send Buffer To Aider" },
+	-- 		{ "<leader>a+", "<cmd>AiderQuickAddFile<cr>", desc = "Add File to Aider" },
+	-- 		{ "<leader>a-", "<cmd>AiderQuickDropFile<cr>", desc = "Drop File from Aider" },
+	-- 	},
+	-- 	dependencies = {
+	-- 		"folke/snacks.nvim",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	-- "catppuccin/nvim",
+	-- 	},
+	-- 	config = true,
+	-- },
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`
@@ -189,11 +178,11 @@ require("lazy").setup({
 		end,
 	},
 	{ "TaDaa/vimade", event = "VeryLazy" },
-	{
-		"davmacario/nvim-quicknotes",
-		keys = { "<leader>qn" },
-		cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" },
-	},
+	-- {
+	-- 	"davmacario/nvim-quicknotes",
+	-- 	keys = { "<leader>qn" },
+	-- 	cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" },
+	-- },
 	{
 		"tzachar/highlight-undo.nvim",
 		config = function()
@@ -207,9 +196,15 @@ require("lazy").setup({
 			"MunifTanjim/nui.nvim",
 		},
 	},
-	{
-		"m4xshen/hardtime.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-	},
 	"rcarriga/nvim-notify",
+
+	-- {
+	-- 	"folke/lazydev.nvim",
+	-- 	ft = "lua",
+	-- 	opts = {
+	-- 		library = {
+	-- 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+	-- 		},
+	-- 	},
+	-- },
 })
