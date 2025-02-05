@@ -124,6 +124,9 @@ require("lazy").setup({
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
+			"echasnovski/mini.pick", -- for file_selector provider mini.pick
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"ibhagwan/fzf-lua", -- for file_selector provider fzf
 			{
 				-- support for image pasting
 				"HakonHarnes/img-clip.nvim",
