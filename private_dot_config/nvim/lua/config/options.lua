@@ -46,6 +46,9 @@ for k, v in pairs(options) do
 end
 
 vim.api.nvim_set_keymap("n", "<C-L>", "", { noremap = true })
+-- vim.api.nvim_create_user_command("AiderTerminalToggle", function()
+-- 	custom.toggle()
+-- end, {})
 
 -- Disable default virtual text
 vim.diagnostic.config({ virtual_text = false })
@@ -53,3 +56,13 @@ vim.diagnostic.config({ virtual_text = false })
 -- use nvim-notify
 local notify = require("notify")
 vim.notify = notify
+
+-- ESC 누르면 search highlight 비활성화 하기
+vim.keymap.set("n", "<esc>", function()
+	if vim.api.nvim_get_vvar("hlsearch") == 1 then
+		vim.cmd("nohlsearch")
+		return "<esc>"
+	end
+
+	return "<esc>"
+end, { silent = true, noremap = true })
