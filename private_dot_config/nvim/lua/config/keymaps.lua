@@ -2,6 +2,7 @@ local wk = require("which-key")
 local ai_utils = require("utils.ai")
 local avante = require("avante.api")
 local copilot = require("copilot.suggestion")
+local harpoon = require("harpoon")
 -- local nvim_aider = require("plugins.nvim-aider")
 --
 -- vim.api.nvim_create_user_command("AiderTerminalToggle", function()
@@ -130,6 +131,95 @@ wk.add({
 			require("dooing.ui").toggle_todo_window()
 		end,
 		desc = "Open quicknotes",
+	},
+	-- harpoon
+	{
+		"<leader>ha",
+		function()
+			harpoon:list():add()
+		end,
+		desc = "Harpoon add item",
+		remap = false,
+	},
+	{
+		"<leader>hl",
+		function()
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end,
+		desc = "Harpoon add item",
+		remap = false,
+	},
+	{
+		"<leader>1",
+		function()
+			harpoon:list():select(1)
+		end,
+		desc = "Harpoon select 1",
+		remap = false,
+	},
+	{
+		"<leader>2",
+		function()
+			harpoon:list():select(2)
+		end,
+		desc = "Harpoon select 2",
+		remap = false,
+	},
+	{
+		"<leader>3",
+		function()
+			harpoon:list():select(3)
+		end,
+		desc = "Harpoon select 3",
+		remap = false,
+	},
+	{
+		"<leader>4",
+		function()
+			harpoon:list():select(4)
+		end,
+		desc = "Harpoon select 4",
+		remap = false,
+	},
+	{
+		"<leader>5",
+		function()
+			harpoon:list():select(5)
+		end,
+		desc = "Harpoon select 5",
+		remap = false,
+	},
+	{
+		"<leader>6",
+		function()
+			harpoon:list():select(6)
+		end,
+		desc = "Harpoon select 6",
+		remap = false,
+	},
+	{
+		"<leader>7",
+		function()
+			harpoon:list():select(7)
+		end,
+		desc = "Harpoon select 7",
+		remap = false,
+	},
+	{
+		"<leader>8",
+		function()
+			harpoon:list():select(8)
+		end,
+		desc = "Harpoon select 8",
+		remap = false,
+	},
+	{
+		"<leader>9",
+		function()
+			harpoon:list():select(9)
+		end,
+		desc = "Harpoon select 9",
+		remap = false,
 	},
 })
 
