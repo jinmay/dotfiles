@@ -54,6 +54,11 @@ require("lazy").setup({
 		"stevearc/dressing.nvim",
 		opts = {},
 	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+	},
 
 	-- LSP
 	"hrsh7th/cmp-buffer",
