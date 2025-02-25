@@ -1,5 +1,11 @@
 My dotfiles, managed by chezmoi.
 
+## Use
+
+```bash
+chezmoi init --apply jinmay
+```
+
 ## Ubuntu
 
 ```bash
@@ -23,3 +29,8 @@ brew bundle dump
 ```bash
 brew bundle
 ```
+
+### need to install manually
+
+- enpass
+- adguard
