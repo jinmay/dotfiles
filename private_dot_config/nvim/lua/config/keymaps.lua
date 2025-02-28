@@ -3,6 +3,7 @@ local ai_utils = require("utils.ai")
 local avante = require("avante.api")
 local copilot = require("copilot.suggestion")
 local harpoon = require("harpoon")
+local local_harpoon = require("plugins.harpoon")
 -- local nvim_aider = require("plugins.nvim-aider")
 --
 -- vim.api.nvim_create_user_command("AiderTerminalToggle", function()
@@ -149,6 +150,14 @@ wk.add({
 		desc = "Harpoon add item",
 		remap = false,
 	},
+	-- {
+	-- 	"<leader>hl",
+	-- 	function()
+	-- 		local_harpoon.toggle_telescope(harpoon:list())
+	-- 	end,
+	-- 	desc = "Harpoon add item",
+	-- 	remap = false,
+	-- },
 	{
 		"<leader>1",
 		function()
