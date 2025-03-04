@@ -20,6 +20,8 @@ telescope.setup({
 			i = {
 				["<C-k>"] = actions.move_selection_previous,
 				["<C-j>"] = actions.move_selection_next,
+				["<C-f>"] = actions.results_scrolling_down,
+				["<C-b>"] = actions.results_scrolling_up,
 				["<C-q>"] = function(prompt_bufnr)
 					local picker = action_state.get_current_picker(prompt_bufnr)
 					local selections = picker:get_multi_selection()
