@@ -81,9 +81,21 @@ wk.add({
 	-- telescope
 	{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = "Find files", remap = false },
 	{ "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = "Find buffers", remap = false },
-	{ "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
+	{ "<leader>fl", "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = "Live Grep", remap = false },
 	{ "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<cr>", desc = "Grep string", remap = false },
 	{ "<leader>fq", "<cmd>lua require('telescope.builtin').quickfix()<cr>", desc = "Quickfix", remap = false },
+	{
+		"<leader>fgb",
+		"<cmd>lua require('telescope.builtin').git_branches()<cr>",
+		desc = "Git branches",
+		remap = false,
+	},
+	{
+		"<leader>fgs",
+		"<cmd>lua require('telescope.builtin').git_stash()<cr>",
+		desc = "Git stash list",
+		remap = false,
+	},
 	-- git
 	{ "<leader>gg", require("utils.git").toggle_fugitive, desc = "Git status", remap = false },
 	{ "<leader>gc", ":G commit<cr>", desc = "Git commit", remap = false },
