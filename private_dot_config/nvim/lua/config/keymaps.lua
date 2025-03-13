@@ -137,7 +137,7 @@ wk.add({
 	{ "zo", "za", desc = "Toggle fold", remap = false },
 
 	-- quicknotes
-	{ "<leader>qn", ":Quicknotes<CR>", desc = "Open quicknotes" },
+	-- { "<leader>qn", ":Quicknotes<CR>", desc = "Open quicknotes" },
 	{
 		"<leader>td",
 		function()
