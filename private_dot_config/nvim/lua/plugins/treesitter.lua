@@ -6,12 +6,10 @@ end
 ts.setup({
 	highlight = {
 		enable = true,
-		disable = {},
 	},
-	-- indent = {
-	-- 	enable = true,
-	-- 	disable = {},
-	-- },
+	indent = {
+		enable = true,
+	},
 	ensure_installed = {
 		-- "javascript",
 		-- "typescript",
@@ -29,7 +27,6 @@ ts.setup({
 	},
 	autotag = {
 		enable = true,
-		disable = {},
 	},
 	-- treesitter-textobjects
 	textobjects = {
@@ -45,5 +42,5 @@ ts.setup({
 	},
 })
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+-- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 -- parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }

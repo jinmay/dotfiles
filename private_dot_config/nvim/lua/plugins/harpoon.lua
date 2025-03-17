@@ -39,4 +39,6 @@ M.toggle_telescope = function(harpoon_files)
 		:find()
 end
 
+require("harpoon"):extend(require("harpoon.extensions").builtins.command_on_nav("UfoEnableFold"))
+
 return M
