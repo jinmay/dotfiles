@@ -41,26 +41,47 @@ M.avante_add_tests = "Implement tests for the following code by using pytest. In
 
 -- neoai for auto commit
 M.generate_commit_message = function(language)
+	-- local prompt = [[
+	--    Generate a concise and clear git commit message based on the following git diff.
+	--    The commit message should have:
+	--    - A short title summary (≤ 75 characters)
+	--    - A description following the format: `type: message`
+	--    - The type should be one of: feat, fix, refactor, chore, docs, style, test, perf
+	--  ]] .. " and you should generate commit message in " .. language .. [[:
+	--  ]] .. [[
+	--  ```
+	--  ]] .. vim.fn.system("git diff --cached") .. [[
+	--  ```
+	--  And you shoud give me commit message immediately.
+	--  And you don't need to explain unnecessary things.
+	--
+	--  This is an example of a good commit message:
+	--  ```
+	--  feat: add new feature to the code
+	--  ```
+	--  ]]
+	-- return prompt
+
 	local prompt = [[
-    Generate a concise and clear git commit message based on the following git diff.
-    The commit message should have:
-    - A short title summary (≤ 75 characters)
-    - A description following the format: `type: message`
-    - The type should be one of: feat, fix, refactor, chore, docs, style, test, perf
-  ]] .. " and you should generate commit message in " .. language .. [[:
-  ]] .. [[
-  ```
+  Generate a concise and well-formatted git commit message based on the following staged git diff.
+
+  Follow these rules:
+
+  1. Write the commit message in ]] .. language .. [[.
+  2. Use English in present tense.
+  3. The subject line (title) must:
+     - Use the format: `type: summary` (e.g., `feat: add login button`)
+     - Be ≤ 50 characters
+     - Start with a lowercase type (choose from: feat, fix, chore, refactor, docs, style, test, perf)
+     - Not end with a period
+  4. Add a body **only if necessary**, to explain what and why (not how).
+  5. Return **only** the commit message. No explanations, notes, or extra output.
+
+  Here is the git diff:
+
   ]] .. vim.fn.system("git diff --cached") .. [[
-  ```
-  And you shoud give me commit message immediately.
-  And you don't need to explain unnecessary things.
 
-  This is an example of a good commit message:
-  ```
-  feat: add new feature to the code
-  ```
   ]]
-
 	return prompt
 end
 
