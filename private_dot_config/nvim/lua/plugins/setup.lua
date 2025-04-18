@@ -158,6 +158,24 @@ require("lazy").setup({
 		},
 	},
 	{
+		"GeorgesAlkhouri/nvim-aider",
+		cmd = "Aider",
+		keys = {
+			{ "<leader>a/", "<cmd>Aider toggle<cr>", desc = "Toggle Aider" },
+			{ "<leader>as", "<cmd>Aider send<cr>", desc = "Send to Aider", mode = { "n", "v" } },
+			{ "<leader>ac", "<cmd>Aider command<cr>", desc = "Aider Commands" },
+			{ "<leader>ab", "<cmd>Aider buffer<cr>", desc = "Send Buffer" },
+			{ "<leader>a+", "<cmd>AiderTreeAddFile<cr>", desc = "Add File from Tree to Aider", ft = "NvimTree" },
+			{ "<leader>a-", "<cmd>AiderTreeDropFile<cr>", desc = "Drop File from Tree from Aider", ft = "NvimTree" },
+		},
+		dependencies = {
+			"folke/snacks.nvim",
+			"catppuccin/nvim",
+		},
+		config = true,
+	},
+
+	{
 		"rachartier/tiny-inline-diagnostic.nvim",
 		event = "VeryLazy", -- Or `LspAttach`
 		priority = 1000,
