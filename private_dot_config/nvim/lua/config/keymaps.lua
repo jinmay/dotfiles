@@ -4,11 +4,6 @@ local avante = require("avante.api")
 local copilot = require("copilot.suggestion")
 local harpoon = require("harpoon")
 local local_harpoon = require("plugins.harpoon")
--- local nvim_aider = require("plugins.nvim-aider")
---
--- vim.api.nvim_create_user_command("AiderTerminalToggle", function()
--- 	nvim_aider.toggle()
--- end, {})
 
 -- Normal
 wk.add({
@@ -272,6 +267,7 @@ wk.add({
 wk.add({
 	mode = "v",
 	{
+		-- { "d", '"_d', desc = "Delete without yank", remap = false },
 		{
 			"<leader>ar",
 			function()
