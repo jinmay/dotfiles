@@ -1,13 +1,3 @@
-require("img-clip").setup({
-	default = {
-		embed_image_as_base64 = false,
-		prompt_for_file_name = false,
-		drag_and_drop = {
-			insert_mode = true,
-		},
-	},
-})
-
 require("render-markdown").setup({
 	file_types = { "markdown", "Avante" },
 })
@@ -27,18 +17,10 @@ require("avante").setup({
 	},
 	openai = {
 		endpoint = "https://api.openai.com/v1",
-		model = "gpt-4o-mini",
+		model = "gpt-4.1",
 		api_key_name = "OPENAI_AVANTE_API_KEY",
 		timeout = 30000,
 		temperature = 0,
-		max_tokens = 4096,
-	},
-	gemini = {
-		endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-		model = "gemini-1.5-flash-8b",
-		api_key_name = "GEMINI_AVANTE_API_KEY",
-		timeout = 30000,
-		temperature = 0,
-		max_tokens = 4096,
+		max_tokens = 8192,
 	},
 })
