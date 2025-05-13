@@ -6,13 +6,13 @@
                     "identifiers": {
                         "is_keyboard": true,
                         "is_pointing_device": true,
-                        "product_id": 64008,
+                        "product_id": 64007,
                         "vendor_id": 13652
                     },
                     "ignore": false
                 }
             ],
-            "name": "Default profile",
+            "name": "jinmay",
             "selected": true,
             "simple_modifications": [
                 {
