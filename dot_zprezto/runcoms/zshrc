@@ -9,13 +9,15 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# poetry
+export PATH="$HOME/.local/bin:$PATH"
+
 # Make sure to use virtualenv
 export PIP_REQUIRE_VIRTUALENV=true
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # why would you type 'cd dir' if you could just type 'dir'?
 setopt AUTO_CD
@@ -28,7 +30,6 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 # openai
 
 # langchain
-LANGCHAIN_TRACING_V2=true
 
 
 #####################
