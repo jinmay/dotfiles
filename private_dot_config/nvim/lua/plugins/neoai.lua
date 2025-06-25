@@ -8,7 +8,7 @@ neoai.setup({
 	models = {
 		{
 			name = "openai",
-			model = "gpt-4o-mini",
+			model = "gpt-4.1-mini",
 			params = nil,
 		},
 	},
