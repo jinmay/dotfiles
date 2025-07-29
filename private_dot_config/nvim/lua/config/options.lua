@@ -46,9 +46,6 @@ for k, v in pairs(options) do
 end
 
 vim.api.nvim_set_keymap("n", "<C-L>", "", { noremap = true })
--- vim.api.nvim_create_user_command("AiderTerminalToggle", function()
--- 	custom.toggle()
--- end, {})
 
 -- Disable default virtual text
 vim.diagnostic.config({ virtual_text = false })
