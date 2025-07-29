@@ -168,11 +168,11 @@ require("lazy").setup({
 		end,
 	},
 	{ "TaDaa/vimade", event = "VeryLazy" },
-	-- {
-	-- 	"davmacario/nvim-quicknotes",
-	-- 	keys = { "<leader>qn" },
-	-- 	cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" },
-	-- },
+	{
+		"davmacario/nvim-quicknotes",
+		keys = { "<leader>qn" },
+		cmd = { "Quicknotes", "QuicknotesClear", "QuicknotesCleanup" },
+	},
 	{
 		"tzachar/highlight-undo.nvim",
 		config = function()
