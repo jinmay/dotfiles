@@ -1,5 +1,6 @@
 local wk = require("which-key")
 local ai_utils = require("utils.ai")
+local git_utils = require("utils.git")
 local avante = require("avante.api")
 local copilot = require("copilot.suggestion")
 local harpoon = require("harpoon")
@@ -102,6 +103,12 @@ wk.add({
 	{ "<leader>gb", ":G blame<cr>", desc = "Git blame", remap = false },
 	{ "<leader>gs", ":G switch", desc = "Git switch", remap = false },
 	{ "<leader>gnb", ":G switch -c ", desc = "New branch & switch", remap = false },
+	{
+		"<leader>gB",
+		git_utils.copy_branch,
+		desc = "Copy current branch",
+		remap = false,
+	},
 	-- window
 	{ "<leader>se", "<C-w>=", desc = "Equalize window size", remap = false },
 	{ "<leader>sh", "<C-w>s", desc = "Split window horizontally", remap = false },
