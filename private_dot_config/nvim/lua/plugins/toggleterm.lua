@@ -38,5 +38,28 @@ function _G.set_terminal_keymaps()
 	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+local trim_spaces = true
+
+local function send(mode)
+	require("toggleterm").send_lines_to_terminal(mode, trim_spaces, { args = vim.v.count })
+end
+
+vim.keymap.set({ "x", "v" }, "<space>s", function()
+	send("visual_selection")
+end, { desc = "Send visual selection to terminal" })
+vim.keymap.set({ "x", "v" }, "<space>S", function()
+	send("visual_lines")
+end, { desc = "Send visual lines to terminal" })
+
+-- -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+-- vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+
+local grp = vim.api.nvim_create_augroup("ToggleTermKeymaps", { clear = true })
+
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = grp,
+	pattern = "term://*toggleterm#*",
+	callback = function()
+		set_terminal_keymaps()
+	end,
+})

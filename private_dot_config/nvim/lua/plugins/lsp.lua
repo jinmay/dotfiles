@@ -10,17 +10,23 @@ lsp_zero.on_attach(function(client, bufnr)
 	opts.desc = "Show LSP references"
 	keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
 
-	opts.desc = "Go to declaration"
-	keymap.set("n", "gd", vim.lsp.buf.declaration, opts)
+	-- opts.desc = "Show LSP definitions"
+	-- keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-	opts.desc = "Show LSP definitions"
-	keymap.set("n", "gD", "<cmd>Telescope lsp_definitions<CR>", opts)
+	opts.desc = "Show LSP incoming calls"
+	keymap.set("n", "gic", "<cmd>Telescope lsp_incoming_calls<CR>", opts)
 
-	opts.desc = "Show LSP implementations"
-	keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+	opts.desc = "Show LSP outgoing calls"
+	keymap.set("n", "goc", "<cmd>Telescope lsp_outgoing_calls<CR>", opts)
+
+	opts.desc = "Go to lsp declaration"
+	keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+
+	opts.desc = "Go to lsp implementations"
+	keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 
 	opts.desc = "Show LSP type definitions"
-	keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+	keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
 	opts.desc = "See available code actions"
 	keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -106,13 +112,8 @@ mason.setup({
 mason_lspconfig.setup({
 	automatic_installation = true,
 	ensure_installed = {
-		"pyright",
-		"html",
-		"cssls",
 		"lua_ls",
-		"emmet_ls",
-		"terraformls",
-		"dockerls",
+		"pyright",
 	},
 	handlers = {
 		lsp_zero.default_setup,
@@ -121,14 +122,8 @@ mason_lspconfig.setup({
 
 mason_tool_installer.setup({
 	ensure_installed = {
-		"prettier",
 		"stylua",
-		"eslint_d",
-		"isort",
-		"black",
-		"pylint",
-		"tflint",
-		"xmlformatter",
-		"debugpy",
+		"pyright",
+		"ruff",
 	},
 })
