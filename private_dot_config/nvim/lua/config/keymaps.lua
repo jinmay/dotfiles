@@ -1,10 +1,9 @@
 local wk = require("which-key")
 local ai_utils = require("utils.ai")
 local git_utils = require("utils.git")
-local avante = require("avante.api")
+-- local avante = require("avante.api")
 local copilot = require("copilot.suggestion")
 local harpoon = require("harpoon")
-local local_harpoon = require("plugins.harpoon")
 
 -- Normal
 wk.add({
@@ -90,6 +89,12 @@ wk.add({
 		"<leader>fgs",
 		"<cmd>lua require('telescope.builtin').git_stash()<cr>",
 		desc = "Git stash list",
+		remap = false,
+	},
+	{
+		"<leader>fgg",
+		"<cmd>lua require('telescope.builtin').git_status({ use_file_path = true })<cr>",
+		desc = "Git status",
 		remap = false,
 	},
 	-- git
@@ -275,34 +280,34 @@ wk.add({
 	mode = "v",
 	{
 		-- { "d", '"_d', desc = "Delete without yank", remap = false },
-		{
-			"<leader>ar",
-			function()
-				avante.ask({ question = ai_utils.avante_code_readability_analysis })
-			end,
-			desc = "Code Readability Analysis(ask)",
-		},
-		{
-			"<leader>ae",
-			function()
-				avante.ask({ question = ai_utils.avante_explain_code })
-			end,
-			desc = "Explain Code(ask)",
-		},
-		{
-			"<leader>ao",
-			function()
-				avante.ask({ question = ai_utils.avante_optimize_code })
-			end,
-			desc = "Optimize Code(ask)",
-		},
-		{
-			"<leader>au",
-			function()
-				avante.ask({ question = ai_utils.avante_add_tests })
-			end,
-			desc = "Add Tests(ask)",
-		},
+		-- {
+		-- 	"<leader>ar",
+		-- 	function()
+		-- 		avante.ask({ question = ai_utils.avante_code_readability_analysis })
+		-- 	end,
+		-- 	desc = "Code Readability Analysis(ask)",
+		-- },
+		-- {
+		-- 	"<leader>ae",
+		-- 	function()
+		-- 		avante.ask({ question = ai_utils.avante_explain_code })
+		-- 	end,
+		-- 	desc = "Explain Code(ask)",
+		-- },
+		-- {
+		-- 	"<leader>ao",
+		-- 	function()
+		-- 		avante.ask({ question = ai_utils.avante_optimize_code })
+		-- 	end,
+		-- 	desc = "Optimize Code(ask)",
+		-- },
+		-- {
+		-- 	"<leader>au",
+		-- 	function()
+		-- 		avante.ask({ question = ai_utils.avante_add_tests })
+		-- 	end,
+		-- 	desc = "Add Tests(ask)",
+		-- },
 		{ "<", "<gv", desc = "Indent left", remap = false },
 		{ ">", ">gv", desc = "Indent right", remap = false },
 		{ "J", ":m '>+1<CR>gv=gv", desc = "Move block down", remap = false },

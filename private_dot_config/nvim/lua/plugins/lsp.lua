@@ -14,10 +14,10 @@ lsp_zero.on_attach(function(client, bufnr)
 	-- keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
 	opts.desc = "Show LSP incoming calls"
-	keymap.set("n", "gic", "<cmd>Telescope lsp_incoming_calls<CR>", opts)
+	keymap.set("n", "gci", "<cmd>Telescope lsp_incoming_calls<CR>", opts)
 
 	opts.desc = "Show LSP outgoing calls"
-	keymap.set("n", "goc", "<cmd>Telescope lsp_outgoing_calls<CR>", opts)
+	keymap.set("n", "gco", "<cmd>Telescope lsp_outgoing_calls<CR>", opts)
 
 	opts.desc = "Go to lsp declaration"
 	keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
@@ -25,8 +25,8 @@ lsp_zero.on_attach(function(client, bufnr)
 	opts.desc = "Go to lsp implementations"
 	keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
 
-	opts.desc = "Show LSP type definitions"
-	keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+	-- opts.desc = "Show LSP type definitions"
+	-- keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
 	opts.desc = "See available code actions"
 	keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
@@ -125,5 +125,6 @@ mason_tool_installer.setup({
 		"stylua",
 		"pyright",
 		"ruff",
+		"prettier",
 	},
 })
