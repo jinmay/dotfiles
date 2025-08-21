@@ -2,17 +2,15 @@ local conform = require("conform")
 
 conform.setup({
 	formatters_by_ft = {
-		css = { "prettier" },
 		json = { "prettier" },
 		yaml = { "prettier" },
-		markdown = { "prettier" },
 		lua = { "stylua" },
-		python = { "ruff" },
+		python = { "ruff_organize_imports", "ruff_fix", "ruff_format" },
 	},
 	format_on_save = {
 		lsp_fallback = true,
 		async = false,
-		timeout_ms = 3000,
+		timeout_ms = 500,
 	},
 })
 
