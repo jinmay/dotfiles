@@ -114,6 +114,7 @@ mason_lspconfig.setup({
 	ensure_installed = {
 		"lua_ls",
 		"pyright",
+		"ruff",
 	},
 	handlers = {
 		lsp_zero.default_setup,
@@ -122,9 +123,15 @@ mason_lspconfig.setup({
 
 mason_tool_installer.setup({
 	ensure_installed = {
+		-- lua
 		"stylua",
+
+		-- python
 		"pyright",
 		"ruff",
+		"ty",
+
+		-- js/ts
 		"prettier",
 	},
 })
