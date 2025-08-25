@@ -1,7 +1,6 @@
-require("venv-selector").setup({
-	parents = 0,
-	name = "versions",
+local venv_selector = require("venv-selector")
 
+venv_selector.setup({
 	settings = {
 		search = {
 			pyenv_virtualenv = {
@@ -10,16 +9,3 @@ require("venv-selector").setup({
 		},
 	},
 })
-
--- -- Auto select virtualenv Nvim open
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	desc = "Auto select virtualenv Nvim open",
--- 	pattern = "*",
--- 	callback = function()
--- 		local venv = vim.fn.findfile(".python-version", vim.fn.getcwd() .. ";")
--- 		if venv ~= "" then
--- 			require("venv-selector").retrieve_from_cache()
--- 		end
--- 	end,
--- 	once = true,
--- })

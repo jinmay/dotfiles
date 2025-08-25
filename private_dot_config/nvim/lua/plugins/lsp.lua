@@ -115,6 +115,7 @@ mason_lspconfig.setup({
 		"lua_ls",
 		"pyright",
 		"ruff",
+		"ty",
 	},
 	handlers = {
 		lsp_zero.default_setup,
