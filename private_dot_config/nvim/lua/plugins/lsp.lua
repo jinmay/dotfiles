@@ -113,7 +113,7 @@ mason_lspconfig.setup({
 	automatic_installation = true,
 	ensure_installed = {
 		"lua_ls",
-		"pyright",
+		-- "pyright",
 		"ruff",
 		"ty",
 	},
@@ -128,7 +128,7 @@ mason_tool_installer.setup({
 		"stylua",
 
 		-- python
-		"pyright",
+		-- "pyright",
 		"ruff",
 		"ty",
 
