@@ -24,6 +24,7 @@ ts.setup({
 		"python",
 		"csv",
 		-- "styled",
+		"dockerfile",
 	},
 	autotag = {
 		enable = true,
