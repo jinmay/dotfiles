@@ -161,7 +161,6 @@ require("lazy").setup({
 			require("highlight-undo").setup({})
 		end,
 	},
-	-- { "atiladefreitas/dooing" },
 	{
 		"Bryley/neoai.nvim",
 		dependencies = {
@@ -169,21 +168,4 @@ require("lazy").setup({
 		},
 	},
 	"rcarriga/nvim-notify",
-
-	-- {
-	-- 	"stevearc/oil.nvim",
-	-- 	opts = {},
-	-- 	dependencies = { { "echasnovski/mini.icons", opts = {} } },
-	-- 	lazy = false,
-	-- },
-
-	-- {
-	-- 	"folke/lazydev.nvim",
-	-- 	ft = "lua",
-	-- 	opts = {
-	-- 		library = {
-	-- 			{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-	-- 		},
-	-- 	},
-	-- },
 })
