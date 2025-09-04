@@ -1,0 +1,10 @@
+[user]
+  name = jinmay
+  email = britzegs@gmail.com
+
+[core]
+  editor = nvim
+	excludesFile = ~/.global_gitignore
+
+[push]
+  autoSetupRemote = true
