@@ -4,7 +4,7 @@
 
 [core]
   editor = nvim
-	excludesFile = ~/.global_gitignore
+	excludesFile = ~/.config/git/.gitignore_global
 
 [push]
   autoSetupRemote = true
