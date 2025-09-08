@@ -1,6 +1,10 @@
 local lspconfig = require("lspconfig")
 local lsp_zero = require("lsp-zero")
 
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local mason_tool_installer = require("mason-tool-installer")
+
 lsp_zero.on_attach(function(client, bufnr)
 	local keymap = vim.keymap
 	local opts = { noremap = true, silent = true }
@@ -95,10 +99,6 @@ cmp.setup({
 -----------------------
 ------- mason----------
 -----------------------
-local mason = require("mason")
-local mason_lspconfig = require("mason-lspconfig")
-local mason_tool_installer = require("mason-tool-installer")
-
 mason.setup({
 	ui = {
 		icons = {
