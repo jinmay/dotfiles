@@ -1,9 +1,57 @@
+-- ruff LSP 전역 차단
+do
+	local orig_start = vim.lsp.start
+	if type(orig_start) == "function" then
+		vim.lsp.start = function(cfg)
+			local name = cfg and cfg.name or ""
+			local cmd = cfg and cfg.cmd or {}
+			local cmd0 = (type(cmd) == "table") and cmd[1] or cmd
+			if name == "ruff" or tostring(cmd0):match("[/\\]?ruff$") then
+				return nil -- 시작 자체 차단
+			end
+			return orig_start(cfg)
+		end
+	end
+
+	local orig_start_client = vim.lsp.start_client
+	vim.lsp.start_client = function(cfg)
+		local name = cfg and cfg.name or ""
+		local cmd = cfg and cfg.cmd or {}
+		local cmd0 = (type(cmd) == "table") and cmd[1] or cmd
+		if name == "ruff" or tostring(cmd0):match("[/\\]?ruff$") then
+			return -1
+		end
+		return orig_start_client(cfg)
+	end
+end
+
 local lspconfig = require("lspconfig")
 local lsp_zero = require("lsp-zero")
 
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local mason_tool_installer = require("mason-tool-installer")
+
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+
+-- === LSP 중복/포맷 제어: 추가 ===
+local function _disable_lsp_formatting(client)
+	client.server_capabilities.documentFormattingProvider = false
+	client.server_capabilities.documentRangeFormattingProvider = false
+end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not client then
+			return
+		end
+
+		-- 모든 LSP의 포맷 기능 비활성(포맷은 Conform이 맡도록)
+		_disable_lsp_formatting(client)
+	end,
+})
 
 lsp_zero.on_attach(function(client, bufnr)
 	local keymap = vim.keymap
@@ -57,7 +105,6 @@ lsp_zero.on_attach(function(client, bufnr)
 	keymap.set("n", "<leader>rn", ":IncRename ", opts)
 end)
 
--- Change the Diagnostic symbols in the sign column (gutter)
 local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
@@ -67,8 +114,6 @@ end
 -----------------------
 ------- cmp -----------
 -----------------------
-local cmp = require("cmp")
-local luasnip = require("luasnip")
 
 -- friendly snippet
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -117,7 +162,14 @@ mason_lspconfig.setup({
 		"ts_ls",
 	},
 	handlers = {
-		lsp_zero.default_setup,
+		-- lsp_zero.default_setup,
+		-- 기본: 나머지는 lsp-zero가 처리
+		function(server)
+			if server == "ruff" or server == "ruff_lsp" then
+				return -- ruff LSP는 설정하지 않음
+			end
+			lsp_zero.default_setup(server)
+		end,
 	},
 })
 
@@ -128,7 +180,8 @@ mason_tool_installer.setup({
 
 		-- python
 		"pyright",
-		"ruff",
+		-- "ruff",
+		-- "ty",
 
 		-- js/ts
 		"prettier",

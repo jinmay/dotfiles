@@ -16,7 +16,7 @@ conform.setup({
 
 vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 	conform.format({
-		lsp_fallback = true,
+		lsp_fallback = false, -- LSP 포맷 대신 Conform만 사용
 		async = false,
 		timeout_ms = 1000,
 	})
