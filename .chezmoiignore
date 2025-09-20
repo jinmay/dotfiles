@@ -4,3 +4,4 @@
 
 .zsh_history
 .zcompdump*
+.config/zsh/.zprezto
