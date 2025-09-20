@@ -1,2 +1,5 @@
 ~/.config/nvim/lazy-lock.json
 ~/.config/nvim/*cache*
+
+.zsh_history
+.zcompdump*
