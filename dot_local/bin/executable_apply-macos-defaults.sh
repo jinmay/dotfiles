@@ -108,4 +108,40 @@ defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 3
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -int 1
 reset_default -currentHost read NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior
 
+# 디스플레이: 밝기 100%, 자동 밝기·True Tone·Night Shift 끄기.
+# 비공개 macOS API 사용. 밝기는 내장 화면만 변경하며 해상도·배치는 변경하지 않습니다.
+osascript -l JavaScript <<'JAVASCRIPT'
+ObjC.import('Cocoa');
+ObjC.import('CoreGraphics');
+['DisplayServices', 'CoreBrightness'].forEach(function (name) {
+    if (!$.NSBundle.bundleWithPath('/System/Library/PrivateFrameworks/' + name + '.framework').load) {
+        throw new Error(name + ' 로드 실패');
+    }
+});
+ObjC.bindFunction('DisplayServicesEnableAmbientLightCompensation', ['int', ['unsigned int', 'bool']]);
+ObjC.bindFunction('DisplayServicesSetBrightness', ['int', ['unsigned int', 'float']]);
+var screens = $.NSScreen.screens;
+for (var i = 0; i < screens.count; i++) {
+    var id = ObjC.unwrap(screens.objectAtIndex(i).deviceDescription.objectForKey('NSScreenNumber'));
+    if (!$.CGDisplayIsBuiltin(id)) continue;
+    if ($.DisplayServicesEnableAmbientLightCompensation(id, false) !== 0) {
+        throw new Error('자동 밝기 설정 실패');
+    }
+    if ($.DisplayServicesSetBrightness(id, 1.0) !== 0) {
+        throw new Error('내장 화면 밝기 설정 실패');
+    }
+}
+var toneClass = $.NSClassFromString('CBTrueToneClient');
+var nightClass = $.NSClassFromString('CBBlueLightClient');
+if (!toneClass || !nightClass) throw new Error('화면 색상 설정 API를 사용할 수 없습니다.');
+var tone = toneClass.alloc.init;
+if (tone.supported && !tone.setEnabled(false)) throw new Error('True Tone 설정 실패');
+if (nightClass.supportsBlueLightReduction) {
+    var night = nightClass.alloc.init;
+    if (!night.setMode(0) || !night.setEnabled(false) || !night.setStrengthCommit(0.5, true)) {
+        throw new Error('Night Shift 설정 실패');
+    }
+}
+JAVASCRIPT
+
 echo "설정 적용 완료. 로그아웃 후 다시 로그인하세요."
