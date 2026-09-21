@@ -78,3 +78,21 @@ bash dot_local/bin/executable_apply-macos-defaults.sh
 Night Shift 끄기·예약 없음·색온도 강도 50%를 복원합니다.
 해상도·주사율·모니터 배치는 변경하지 않습니다. True Tone·Night Shift는 시스템 공통 설정입니다.
 디스플레이 제어는 비공개 macOS API를 사용하므로 버전에 따라 실패할 수 있습니다.
+
+### Spotlight·Alfred·한영 전환
+
+위 macOS 복원 스크립트에 다음 단축키도 포함됩니다.
+
+| 기능 | 설정 |
+| --- | --- |
+| Spotlight 검색·Finder 검색 | 단축키 끄기 |
+| Alfred 호출 | Option + Space |
+| 이전 입력 소스 선택(한영 전환) | Command + Space |
+| 입력 메뉴에서 다음 소스 선택 | 단축키 끄기 |
+
+Alfred를 한 번 실행한 뒤 Alfred와 Alfred Preferences를 종료하고 스크립트를 실행하세요.
+Alfred가 초기화되지 않았다면 해당 항목만 건너뛰므로 초기화 후 다시 실행하세요.
+Alfred의 기기별 경로는 실행 시 읽으며, 단축키 외의 설정은 보존합니다.
+한영 전환에는 시스템 설정 → 키보드 → 텍스트 입력에 ABC와 한국어 두벌식이 필요합니다.
+입력 소스 목록과 기존 Karabiner 매핑은 변경하지 않습니다.
+완료 후 로그아웃·로그인하고 Alfred를 실행하세요.
