@@ -108,6 +108,27 @@ defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 3
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -int 1
 reset_default -currentHost read NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior
 
+# Spotlight 끄기, 한영 전환은 ⌘ Space. 다른 시스템 단축키는 보존합니다.
+defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add \
+    64 '<plist version="1.0"><dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict></plist>' \
+    65 '<plist version="1.0"><dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>65535</integer><integer>49</integer><integer>1572864</integer></array><key>type</key><string>standard</string></dict></dict></plist>' \
+    60 '<plist version="1.0"><dict><key>enabled</key><true/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>1048576</integer></array><key>type</key><string>standard</string></dict></dict></plist>' \
+    61 '<plist version="1.0"><dict><key>enabled</key><false/><key>value</key><dict><key>parameters</key><array><integer>32</integer><integer>49</integer><integer>786432</integer></array><key>type</key><string>standard</string></dict></dict></plist>'
+
+# Alfred 호출키: ⌥ Space. 새 맥의 경로·기기 식별자는 Alfred가 만든 값을 사용합니다.
+# Alfred를 한 번 실행한 뒤 Alfred와 Alfred Preferences를 종료하고 적용하세요.
+alfred_state="$HOME/Library/Application Support/Alfred/prefs.json"
+if [[ -f "$alfred_state" ]]; then
+    alfred_preferences=$(plutil -extract current raw -o - "$alfred_state")
+    alfred_localhash=$(plutil -extract localhash raw -o - "$alfred_state")
+    alfred_hotkey="$alfred_preferences/preferences/local/$alfred_localhash/hotkey/prefs.plist"
+    mkdir -p "$(dirname "$alfred_hotkey")"
+    if [[ ! -f "$alfred_hotkey" ]]; then plutil -create xml1 "$alfred_hotkey"; fi
+    plutil -replace default -json '{"key":49,"mod":524288,"string":" "}' "$alfred_hotkey"
+else
+    echo "Alfred 단축키 건너뜀: Alfred를 한 번 실행·종료한 뒤 다시 적용하세요." >&2
+fi
+
 # 디스플레이: 밝기 100%, 자동 밝기·True Tone·Night Shift 끄기.
 # 비공개 macOS API 사용. 밝기는 내장 화면만 변경하며 해상도·배치는 변경하지 않습니다.
 osascript -l JavaScript <<'JAVASCRIPT'
