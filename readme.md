@@ -18,16 +18,32 @@ After install, restart session
 
 ## Macbook
 
-### backup
+### 패키지 설치
+
+기본 환경과 선택 설치를 나눠 관리합니다. chezmoi는 파일만 배치하며 패키지를 자동 설치하지 않습니다.
+
+| 파일 | 범위 |
+| --- | --- |
+| `~/Brewfile` | chezmoi·Git, zsh·tmux·Neovim·검색 도구, Ghostty·폰트·Karabiner·Rectangle |
+| `~/Brewfile.extra` | 개발 SDK·클라우드·AI 도구·일반 앱 등 나머지 |
 
 ```bash
-brew bundle dump
+# 기본 환경만 설치
+brew bundle --file=~/Brewfile
+
+# 필요할 때 선택 도구도 설치
+brew bundle --file=~/Brewfile.extra
 ```
 
-### restore
+extra 전체가 필요하지 않으면 원하는 패키지만 `brew install 패키지명` 또는
+`brew install --cask 앱이름`으로 설치하세요.
+
+### 설치 목록 백업
+
+분리한 파일을 덮어쓰지 않도록 별도 스냅샷으로 저장합니다.
 
 ```bash
-brew bundle
+brew bundle dump --file=~/Brewfile.snapshot
 ```
 
 ### need to install manually
