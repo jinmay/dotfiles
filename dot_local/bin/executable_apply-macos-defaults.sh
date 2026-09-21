@@ -1,0 +1,108 @@
+#!/bin/bash
+set -euo pipefail
+
+# macOS 15.7.9에서 추출. 저장되지 않은 항목은 기본값 사용 상태로 복원합니다.
+if [[ "$(uname -s)" != Darwin ]]; then
+  echo "macOS에서 실행하세요." >&2
+  exit 1
+fi
+
+# 시스템 설정을 닫은 뒤 실행하세요. 완료 후 로그아웃/로그인하세요.
+# 키가 이미 없으면 건너뛰고, 실제 삭제 실패는 오류로 처리합니다.
+reset_default() {
+  if defaults "$@" >/dev/null 2>&1; then
+    local args=("$@")
+    local i
+    for i in "${!args[@]}"; do
+      if [[ "${args[$i]}" == read ]]; then args[$i]=delete; break; fi
+    done
+    defaults "${args[@]}"
+  fi
+}
+
+# 트랙패드
+defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -int 1
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.AppleMultitouchTrackpad DragLock -bool true
+defaults write com.apple.AppleMultitouchTrackpad Dragging -bool true
+defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
+defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool false
+defaults write com.apple.AppleMultitouchTrackpad SecondClickThreshold -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFiveFingerPinchGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerPinchGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHandResting -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadHorizScroll -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadMomentumScroll -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRotate -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadScroll -bool true
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad USBMouseStopsTrackpad -int 0
+
+# 외장 트랙패드
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad DragLock -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFiveFingerPinchGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerPinchGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadHandResting -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadHorizScroll -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadMomentumScroll -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRotate -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadScroll -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool false
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerVertSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerFromRightEdgeSwipeGesture -int 0
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad USBMouseStopsTrackpad -int 0
+
+# 트랙패드·키보드·확장자
+reset_default read NSGlobalDomain com.apple.trackpad.scaling
+reset_default read NSGlobalDomain com.apple.swipescrolldirection
+reset_default read NSGlobalDomain com.apple.mouse.tapBehavior
+defaults write NSGlobalDomain KeyRepeat -float 2.0
+defaults write NSGlobalDomain InitialKeyRepeat -float 15.0
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+reset_default read NSGlobalDomain AppleShowAllExtensions
+
+# Dock
+defaults write com.apple.dock tilesize -float 24.0
+defaults write com.apple.dock orientation -string left
+reset_default read com.apple.dock autohide
+reset_default read com.apple.dock magnification
+reset_default read com.apple.dock largesize
+
+# Finder
+reset_default read com.apple.finder ShowPathbar
+reset_default read com.apple.finder ShowStatusBar
+
+# 스크린샷
+reset_default read com.apple.screencapture location
+reset_default read com.apple.screencapture type
+
+# 기기별 트랙패드 설정
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 3
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -int 1
+reset_default -currentHost read NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior
+
+echo "설정 적용 완료. 로그아웃 후 다시 로그인하세요."
