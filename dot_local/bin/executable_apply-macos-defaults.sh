@@ -92,6 +92,9 @@ reset_default read com.apple.dock autohide
 reset_default read com.apple.dock magnification
 reset_default read com.apple.dock largesize
 
+# 배터리 퍼센트 표시
+defaults -currentHost write com.apple.controlcenter BatteryShowPercentage -bool true
+
 # Finder
 reset_default read com.apple.finder ShowPathbar
 reset_default read com.apple.finder ShowStatusBar
